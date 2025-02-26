@@ -12,3 +12,28 @@ const pagination = document.querySelector('[data-js="pagination"]');
 const maxPage = 1;
 const page = 1;
 const searchQuery = "";
+
+// Fetch the data from the API 
+async function fetchCharacters(page) {
+  try {
+    const response = await fetch("https://rickandmortyapi.com/api/character");
+    const contentType = response.headers.get("content-type");
+
+    if (!response.ok) {
+      throw new Error(`Uups, da ist was falsch gelaufen: ${response.status} `)
+    }
+
+    // Check if json format
+    if (!contentType.includes("json")) {
+      throw new Error(`Uups, das ist kein json Format ${contentType} `);
+    }
+
+    return await response.json();
+
+  } catch (error) {
+    console.log(`Fehler ist geworfen: ${error.message} `);
+
+  }
+}
+
+console.log(fetchCharacters());
