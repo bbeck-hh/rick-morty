@@ -2,6 +2,9 @@ export function createCharacterCard() { }
 
 export function CharacterCard(characterData) {
 
+    // it could be destructored, but no must have ;-)
+    //const { name, image, status, type, episode, ...restCharacterInfo } = characterData;
+
     const card = document.createElement("li");
     card.classList.add("card");
     card.innerHTML = `
