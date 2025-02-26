@@ -1,3 +1,7 @@
+# Start here
+
+[Click here to get our App](https://bbeck-hh.github.io/rick-morty/)
+
 # Recap Project 3: Rick and Morty App
 
 In this project, you will create a single-page app for browsing all characters from the popular TV show **Rick and Morty**.
