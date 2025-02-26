@@ -17,7 +17,7 @@ const searchQuery = "";
 
 const urlApi = () => `https://rickandmortyapi.com/api/character/?page=${page}`;
 
-// Create the eventlisteners
+// Create the eventlisteners for next and previous
 
 nextButton.addEventListener("click", () => {
   if (page >= maxPage) {
@@ -40,7 +40,6 @@ prevButton.addEventListener("click", () => {
     alert("There is nothing beyond this point, idiot!");
     prevButton.disabled = true;
     return;
-    // nextButton.disabled = false;
   } else {
     nextButton.disabled = false;
   }
@@ -80,9 +79,9 @@ async function fetchCharacters(urlApi) {
       cardContainer.append(CharacterCard(character));
     });
 
+    // Fill the page number && max page in the pagination part
     pagination.textContent = Pagination(page, maxPage);
 
-    // navigation.append(Pagination(page, maxPage));
   } catch (error) {
     console.log(`Fehler ist geworfen: ${error.message} `);
   }
