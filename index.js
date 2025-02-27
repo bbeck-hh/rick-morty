@@ -1,4 +1,5 @@
 import { CharacterCard } from "./components/CharacterCard/CharacterCard.js";
+import { NavButton } from "./components/NavButton/NavButton.js";
 import { Pagination } from "./components/NavPagination/NavPagination.js";
 
 const cardContainer = document.querySelector('[data-js="card-container"]');
@@ -8,14 +9,15 @@ const searchBarContainer = document.querySelector(
 
 const searchBar = document.querySelector('[data-js="search-bar"]');
 const navigation = document.querySelector('[data-js="navigation"]');
-const prevButton = document.querySelector('[data-js="button-prev"]');
-const nextButton = document.querySelector('[data-js="button-next"]');
-const pagination = document.querySelector('[data-js="pagination"]');
+// Creation sector
+const prevButton = NavButton("prev", "previous");
+const nextButton = NavButton("next", "next");
 
 // States
 let maxPage = 1;
 let page = 1;
 let searchQuery = "";
+
 
 const urlApi = () => `https://rickandmortyapi.com/api/character/?page=${page}`;
 
@@ -76,8 +78,13 @@ export async function fetchCharacters(urlApi, searchQuery) {
       cardContainer.append(CharacterCard(character));
     });
 
+
+    const pagination = Pagination(page, maxPage);
+
     // Fill the page number && max page in the pagination part
-    pagination.textContent = Pagination(page, maxPage);
+    navigation.innerHTML = "";
+    navigation.append(prevButton, pagination, nextButton);
+
 
     // next & prevButton edge cases (first & last page)
     prevButton.disabled = false;
@@ -104,6 +111,13 @@ function calculateApiURL() {
     return `${baseURL}&name=${searchQuery}`;
   }
 }
+
+// Render NavButton
+// const navbuttonPrev = NavButton("prev", "previous");
+// const navbuttonNext = NavButton("next", "next");
+
+
+
 
 // Render page
 fetchCharacters(calculateApiURL());
